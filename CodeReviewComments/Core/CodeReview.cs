@@ -8,12 +8,15 @@ namespace CodeReviewComments.Core
 {
     public class CodeReview
     {
-        public readonly CodeReviewData m_Data;
+        public CodeReviewData m_Data;
         private int m_CommentCount;
+        private readonly string m_Path;
+
         public BindingList<string> CommentInds { get; }
 
         public CodeReview()
         {
+            m_Path = $"{Directory.GetCurrentDirectory().Replace("bin\\", string.Empty).Replace("Debug", string.Empty).Replace("Release", string.Empty)}\\CodeReviews\\";
             m_Data = new CodeReviewData();
             m_CommentCount = 0;
             CommentInds = new BindingList<string> ();
@@ -53,10 +56,18 @@ namespace CodeReviewComments.Core
                 {
                     xmlSerializer.Serialize(writer, m_Data);
                     xml = sww.ToString(); // Your XML
-                    string path = $"{Directory.GetCurrentDirectory().Replace("bin\\", string.Empty).Replace("Debug", string.Empty).Replace("Release", string.Empty)}\\CodeReviews\\";
-                    Directory.CreateDirectory(path);
-                    File.WriteAllText($"{path}{fileName}.xml", xml);
+                    Directory.CreateDirectory(m_Path);
+                    File.WriteAllText($"{m_Path}{fileName}.cwr", xml);
                 }
+            }
+        }
+
+        public void LoadData(string fileName)
+        {
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(CodeReviewData));
+            using (StreamReader reader = new StreamReader($"{m_Path}{fileName}.cwr"))
+            {
+                m_Data = (CodeReviewData) xmlSerializer.Deserialize(reader);
             }
         }
     }
