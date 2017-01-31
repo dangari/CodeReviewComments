@@ -228,6 +228,7 @@
             this.saveReview.TabIndex = 6;
             this.saveReview.Text = "Save Review";
             this.saveReview.UseVisualStyleBackColor = true;
+            this.saveReview.Click += new System.EventHandler(this.saveReview_Click);
             // 
             // form1BindingSource
             // 

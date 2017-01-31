@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Serialization;
 using CodeReviewComments.Core;
 using CodeReviewComments.Data;
 
@@ -10,6 +13,7 @@ namespace CodeReviewComments
     {
         private readonly CodeReview m_CodeReview;
         private string m_SelectedComment = string.Empty;
+
         public Form1()
         {
             InitializeComponent();
@@ -19,21 +23,34 @@ namespace CodeReviewComments
 
         private void saveComment_Click(object sender, EventArgs e)
         {
-            CommentType type = (CommentType) Enum.Parse(typeof(CommentType), commentType.SelectedItem.ToString(), true);
-            int lineNumber = int.Parse(lineNumberText.Text);
-            string fileName = fileNameText.Text;
-            string text = commentBox.Text;
-
-            if (string.IsNullOrEmpty(m_SelectedComment))
+            //todo: Add error handling
+            try
             {
-                m_CodeReview.AddComment(type, fileName, lineNumber, text);
-            }
-            else
-            {
-                m_CodeReview.EditComment(m_SelectedComment, type, fileName, lineNumber, text);
-            }
+                CommentType type = (CommentType)Enum.Parse(typeof(CommentType), commentType.SelectedItem.ToString(), true);
+                int lineNumber = int.Parse(lineNumberText.Text);
+                string fileName = fileNameText.Text;
+                string text = commentBox.Text;
 
-            m_SelectedComment = string.Empty;
+                if (string.IsNullOrEmpty(m_SelectedComment))
+                {
+                    m_CodeReview.AddComment(type, fileName, lineNumber, text);
+                }
+                else
+                {
+                    m_CodeReview.EditComment(m_SelectedComment, type, fileName, lineNumber, text);
+                }
+
+                m_SelectedComment = string.Empty;
+            }
+            catch (Exception err)
+            {
+                MessageBox.Show(
+                    $"An Error has been occured while trying to save \n {err.Message}",
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+            
         }
 
         private void commentList_SelectedIndexChanged(object sender, EventArgs e)
@@ -44,6 +61,19 @@ namespace CodeReviewComments
             lineNumberText.Text = comment.LineNumber.ToString();
             fileNameText.Text = comment.FileName;
             commentBox.Text = comment.Text;
+        }
+
+        private void saveReview_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(issueNumberText.Text))
+            {
+                MessageBox.Show("Issue Name is Needed", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return;
+            }
+
+            m_CodeReview.m_Data.IssueNumber = issueNumberText.Text;
+            m_CodeReview.SaveComments(issueNumberText.Text);
         }
     }
 }
