@@ -2,9 +2,17 @@
 {
     public class Comment
     {
-        public string Files { get; set; }
+        public Comment(CommentType type, string fileName, int lineNumber, string text)
+        {
+            Type = type;
+            FileName = fileName;
+            LineNumber = lineNumber;
+            Text = text;
+        }
+
+        public string FileName { get; set; }
         public CommentType Type { get; set; }
-        public string LineNumber { get; set; }
-        public string Code { get; set; }
+        public int LineNumber { get; set; }
+        public string Text { get; set; }
     }
 }

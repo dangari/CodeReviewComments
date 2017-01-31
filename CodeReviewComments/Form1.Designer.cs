@@ -28,26 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.reviewCode = new System.Windows.Forms.TabPage();
-            this.fixCode = new System.Windows.Forms.TabPage();
-            this.issueNumberText = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.saveComment = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lineNumberText = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.fileNameText = new System.Windows.Forms.TextBox();
+            this.commentBox = new System.Windows.Forms.RichTextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.commentType = new System.Windows.Forms.ComboBox();
+            this.commentList = new System.Windows.Forms.ListBox();
+            this.codeReviewBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.issueNumberText = new System.Windows.Forms.TextBox();
+            this.fixCode = new System.Windows.Forms.TabPage();
+            this.form1BindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.editReview = new System.Windows.Forms.Button();
             this.saveReview = new System.Windows.Forms.Button();
+            this.form1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabControl1.SuspendLayout();
             this.reviewCode.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.codeReviewBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.form1BindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.form1BindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -64,7 +71,7 @@
             // 
             this.reviewCode.Controls.Add(this.saveComment);
             this.reviewCode.Controls.Add(this.panel1);
-            this.reviewCode.Controls.Add(this.listBox1);
+            this.reviewCode.Controls.Add(this.commentList);
             this.reviewCode.Controls.Add(this.label1);
             this.reviewCode.Controls.Add(this.issueNumberText);
             this.reviewCode.Location = new System.Drawing.Point(4, 22);
@@ -74,6 +81,121 @@
             this.reviewCode.TabIndex = 0;
             this.reviewCode.Text = "Review Code";
             this.reviewCode.UseVisualStyleBackColor = true;
+            // 
+            // saveComment
+            // 
+            this.saveComment.Location = new System.Drawing.Point(537, 405);
+            this.saveComment.Name = "saveComment";
+            this.saveComment.Size = new System.Drawing.Size(92, 23);
+            this.saveComment.TabIndex = 4;
+            this.saveComment.Text = "Save Comment";
+            this.saveComment.UseVisualStyleBackColor = true;
+            this.saveComment.Click += new System.EventHandler(this.saveComment_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.lineNumberText);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.fileNameText);
+            this.panel1.Controls.Add(this.commentBox);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.commentType);
+            this.panel1.Location = new System.Drawing.Point(46, 74);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(457, 326);
+            this.panel1.TabIndex = 3;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(279, 44);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(92, 13);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Start Line Number";
+            // 
+            // lineNumberText
+            // 
+            this.lineNumberText.Location = new System.Drawing.Point(377, 41);
+            this.lineNumberText.Name = "lineNumberText";
+            this.lineNumberText.Size = new System.Drawing.Size(55, 20);
+            this.lineNumberText.TabIndex = 11;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(14, 48);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(54, 13);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "File Name";
+            // 
+            // fileNameText
+            // 
+            this.fileNameText.Location = new System.Drawing.Point(86, 42);
+            this.fileNameText.Name = "fileNameText";
+            this.fileNameText.Size = new System.Drawing.Size(132, 20);
+            this.fileNameText.TabIndex = 9;
+            // 
+            // commentBox
+            // 
+            this.commentBox.Location = new System.Drawing.Point(3, 73);
+            this.commentBox.Name = "commentBox";
+            this.commentBox.Size = new System.Drawing.Size(451, 250);
+            this.commentBox.TabIndex = 8;
+            this.commentBox.Text = "";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(14, 18);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(31, 13);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Type";
+            // 
+            // commentType
+            // 
+            this.commentType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.commentType.Items.AddRange(new object[] {
+            "Refactor",
+            "UnusedDirectives",
+            "Comment"});
+            this.commentType.Location = new System.Drawing.Point(86, 10);
+            this.commentType.Name = "commentType";
+            this.commentType.Size = new System.Drawing.Size(132, 21);
+            this.commentType.TabIndex = 6;
+            // 
+            // commentList
+            // 
+            this.commentList.DataSource = this.codeReviewBindingSource;
+            this.commentList.FormattingEnabled = true;
+            this.commentList.Location = new System.Drawing.Point(509, 32);
+            this.commentList.Name = "commentList";
+            this.commentList.Size = new System.Drawing.Size(120, 368);
+            this.commentList.TabIndex = 2;
+            this.commentList.SelectedIndexChanged += new System.EventHandler(this.commentList_SelectedIndexChanged);
+            // 
+            // codeReviewBindingSource
+            // 
+            this.codeReviewBindingSource.DataSource = typeof(CodeReviewComments.Core.CodeReview);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(43, 39);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(72, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Issue Number";
+            // 
+            // issueNumberText
+            // 
+            this.issueNumberText.Location = new System.Drawing.Point(118, 32);
+            this.issueNumberText.Name = "issueNumberText";
+            this.issueNumberText.Size = new System.Drawing.Size(132, 20);
+            this.issueNumberText.TabIndex = 0;
             // 
             // fixCode
             // 
@@ -85,109 +207,9 @@
             this.fixCode.Text = "Fix Code";
             this.fixCode.UseVisualStyleBackColor = true;
             // 
-            // issueNumberText
+            // form1BindingSource1
             // 
-            this.issueNumberText.Location = new System.Drawing.Point(118, 32);
-            this.issueNumberText.Name = "issueNumberText";
-            this.issueNumberText.Size = new System.Drawing.Size(132, 20);
-            this.issueNumberText.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(43, 39);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(72, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Issue Number";
-            // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(509, 32);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(120, 368);
-            this.listBox1.TabIndex = 2;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.textBox2);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.textBox1);
-            this.panel1.Controls.Add(this.richTextBox1);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.comboBox1);
-            this.panel1.Location = new System.Drawing.Point(46, 74);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(457, 326);
-            this.panel1.TabIndex = 3;
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(3, 73);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(451, 250);
-            this.richTextBox1.TabIndex = 8;
-            this.richTextBox1.Text = "";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 18);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(31, 13);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Type";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(86, 10);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(132, 21);
-            this.comboBox1.TabIndex = 6;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(86, 42);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(132, 20);
-            this.textBox1.TabIndex = 9;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 48);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(54, 13);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "File Name";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(377, 41);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(55, 20);
-            this.textBox2.TabIndex = 11;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(279, 44);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(92, 13);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "Start Line Number";
-            // 
-            // saveComment
-            // 
-            this.saveComment.Location = new System.Drawing.Point(537, 405);
-            this.saveComment.Name = "saveComment";
-            this.saveComment.Size = new System.Drawing.Size(92, 23);
-            this.saveComment.TabIndex = 4;
-            this.saveComment.Text = "Save Comment";
-            this.saveComment.UseVisualStyleBackColor = true;
+            this.form1BindingSource1.DataSource = typeof(CodeReviewComments.Form1);
             // 
             // editReview
             // 
@@ -207,6 +229,10 @@
             this.saveReview.Text = "Save Review";
             this.saveReview.UseVisualStyleBackColor = true;
             // 
+            // form1BindingSource
+            // 
+            this.form1BindingSource.DataSource = typeof(CodeReviewComments.Form1);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -222,6 +248,9 @@
             this.reviewCode.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.codeReviewBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.form1BindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.form1BindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -236,15 +265,18 @@
         private System.Windows.Forms.Button saveComment;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox lineNumberText;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.TextBox fileNameText;
+        private System.Windows.Forms.RichTextBox commentBox;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ComboBox commentType;
+        private System.Windows.Forms.ListBox commentList;
         private System.Windows.Forms.Button editReview;
         private System.Windows.Forms.Button saveReview;
+        private System.Windows.Forms.BindingSource form1BindingSource1;
+        private System.Windows.Forms.BindingSource form1BindingSource;
+        private System.Windows.Forms.BindingSource codeReviewBindingSource;
     }
 }
 
