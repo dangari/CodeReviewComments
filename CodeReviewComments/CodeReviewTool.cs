@@ -43,7 +43,10 @@ namespace CodeReviewComments
                     m_CodeReview.EditComment(m_SelectedComment, type, fileName, lineNumber, text, code);
                 }
 
+                m_CodeReview.SetIssueNumber(issueNumberText.Text);
+
                 m_SelectedComment = string.Empty;
+                OnChange();
             }
             catch (Exception err)
             {
@@ -69,6 +72,7 @@ namespace CodeReviewComments
             lineNumberText.Text = comment.LineNumber.ToString();
             fileNameText.Text = comment.FileName;
             commentBox.Text = comment.Text;
+            codeTextBox.Text = comment.Code;
         }
 
         private void saveReview_Click(object sender, EventArgs e)
@@ -124,18 +128,30 @@ namespace CodeReviewComments
                 case CommentType.UnusedDirectives:
                     fileNameText.Enabled = true;
                     lineNumberText.Enabled = false;
+                    lineNumberText.Text = string.Empty;
                     codeTextBox.Enabled = false;
+                    codeTextBox.Text = string.Empty;
                     commentBox.Enabled = false;
+                    commentBox.Text = string.Empty;
                     break;
                 case CommentType.Comment:
                     fileNameText.Enabled = true;
                     commentBox.Enabled = true;
                     lineNumberText.Enabled = false;
+                    lineNumberText.Text = string.Empty;
                     codeTextBox.Enabled = false;
+                    codeTextBox.Text = string.Empty;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+
+        private void exportMarkUpBtn_Click(object sender, EventArgs e)
+        {
+            string markUp = m_CodeReview.GetMarkUp();
+            MarkExport form = new MarkExport(markUp);
+            form.ShowDialog();
         }
     }
 }

@@ -32,23 +32,24 @@
             this.reviewCode = new System.Windows.Forms.TabPage();
             this.saveComment = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.codeTextBox = new System.Windows.Forms.RichTextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lineNumberText = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.commentBox = new System.Windows.Forms.RichTextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.commentType = new System.Windows.Forms.ComboBox();
+            this.fileNameText = new System.Windows.Forms.TextBox();
             this.commentList = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.issueNumberText = new System.Windows.Forms.TextBox();
             this.fixCode = new System.Windows.Forms.TabPage();
             this.editReview = new System.Windows.Forms.Button();
             this.saveReview = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.label6 = new System.Windows.Forms.Label();
-            this.codeTextBox = new System.Windows.Forms.RichTextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.lineNumberText = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.fileNameText = new System.Windows.Forms.TextBox();
+            this.exportMarkUpBtn = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.reviewCode.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -62,7 +63,7 @@
             this.tabControl1.Location = new System.Drawing.Point(13, 13);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(674, 608);
+            this.tabControl1.Size = new System.Drawing.Size(913, 608);
             this.tabControl1.TabIndex = 0;
             // 
             // reviewCode
@@ -75,14 +76,14 @@
             this.reviewCode.Location = new System.Drawing.Point(4, 22);
             this.reviewCode.Name = "reviewCode";
             this.reviewCode.Padding = new System.Windows.Forms.Padding(3);
-            this.reviewCode.Size = new System.Drawing.Size(666, 582);
+            this.reviewCode.Size = new System.Drawing.Size(905, 582);
             this.reviewCode.TabIndex = 0;
             this.reviewCode.Text = "Review Code";
             this.reviewCode.UseVisualStyleBackColor = true;
             // 
             // saveComment
             // 
-            this.saveComment.Location = new System.Drawing.Point(542, 504);
+            this.saveComment.Location = new System.Drawing.Point(745, 318);
             this.saveComment.Name = "saveComment";
             this.saveComment.Size = new System.Drawing.Size(92, 23);
             this.saveComment.TabIndex = 4;
@@ -101,11 +102,68 @@
             this.panel1.Controls.Add(this.fileNameText);
             this.panel1.Location = new System.Drawing.Point(46, 74);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(462, 493);
+            this.panel1.Size = new System.Drawing.Size(693, 493);
             this.panel1.TabIndex = 3;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.label6);
+            this.panel2.Controls.Add(this.codeTextBox);
+            this.panel2.Controls.Add(this.label4);
+            this.panel2.Controls.Add(this.lineNumberText);
+            this.panel2.Location = new System.Drawing.Point(13, 251);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(680, 239);
+            this.panel2.TabIndex = 15;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 5);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(74, 13);
+            this.label6.TabIndex = 21;
+            this.label6.Text = "Code Snippet:";
+            // 
+            // codeTextBox
+            // 
+            this.codeTextBox.AcceptsTab = true;
+            this.codeTextBox.Location = new System.Drawing.Point(4, 56);
+            this.codeTextBox.Name = "codeTextBox";
+            this.codeTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.codeTextBox.Size = new System.Drawing.Size(662, 175);
+            this.codeTextBox.TabIndex = 20;
+            this.codeTextBox.Text = "";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(516, 33);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(92, 13);
+            this.label4.TabIndex = 19;
+            this.label4.Text = "Start Line Number";
+            // 
+            // lineNumberText
+            // 
+            this.lineNumberText.Location = new System.Drawing.Point(618, 30);
+            this.lineNumberText.Name = "lineNumberText";
+            this.lineNumberText.Size = new System.Drawing.Size(48, 20);
+            this.lineNumberText.TabIndex = 18;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(10, 97);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(54, 13);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "Comment:";
             // 
             // commentBox
             // 
+            this.commentBox.AcceptsTab = true;
+            this.commentBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.commentBox.Location = new System.Drawing.Point(13, 113);
             this.commentBox.Name = "commentBox";
             this.commentBox.Size = new System.Drawing.Size(441, 131);
@@ -121,6 +179,15 @@
             this.label2.TabIndex = 7;
             this.label2.Text = "Type";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(17, 58);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(54, 13);
+            this.label3.TabIndex = 17;
+            this.label3.Text = "File Name";
+            // 
             // commentType
             // 
             this.commentType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -134,12 +201,19 @@
             this.commentType.TabIndex = 6;
             this.commentType.SelectedIndexChanged += new System.EventHandler(this.commentType_SelectedIndexChanged);
             // 
+            // fileNameText
+            // 
+            this.fileNameText.Location = new System.Drawing.Point(93, 52);
+            this.fileNameText.Name = "fileNameText";
+            this.fileNameText.Size = new System.Drawing.Size(125, 20);
+            this.fileNameText.TabIndex = 16;
+            // 
             // commentList
             // 
             this.commentList.FormattingEnabled = true;
-            this.commentList.Location = new System.Drawing.Point(514, 74);
+            this.commentList.Location = new System.Drawing.Point(745, 74);
             this.commentList.Name = "commentList";
-            this.commentList.Size = new System.Drawing.Size(120, 420);
+            this.commentList.Size = new System.Drawing.Size(120, 238);
             this.commentList.TabIndex = 2;
             this.commentList.SelectedIndexChanged += new System.EventHandler(this.commentList_SelectedIndexChanged);
             // 
@@ -164,7 +238,7 @@
             this.fixCode.Location = new System.Drawing.Point(4, 22);
             this.fixCode.Name = "fixCode";
             this.fixCode.Padding = new System.Windows.Forms.Padding(3);
-            this.fixCode.Size = new System.Drawing.Size(666, 434);
+            this.fixCode.Size = new System.Drawing.Size(905, 582);
             this.fixCode.TabIndex = 1;
             this.fixCode.Text = "Fix Code";
             this.fixCode.UseVisualStyleBackColor = true;
@@ -189,80 +263,22 @@
             this.saveReview.UseVisualStyleBackColor = true;
             this.saveReview.Click += new System.EventHandler(this.saveReview_Click);
             // 
-            // label5
+            // exportMarkUpBtn
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(10, 97);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(54, 13);
-            this.label5.TabIndex = 14;
-            this.label5.Text = "Comment:";
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.label6);
-            this.panel2.Controls.Add(this.codeTextBox);
-            this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.lineNumberText);
-            this.panel2.Location = new System.Drawing.Point(13, 251);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(441, 239);
-            this.panel2.TabIndex = 15;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 5);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(74, 13);
-            this.label6.TabIndex = 21;
-            this.label6.Text = "Code Snippet:";
-            // 
-            // codeTextBox
-            // 
-            this.codeTextBox.Location = new System.Drawing.Point(4, 56);
-            this.codeTextBox.Name = "codeTextBox";
-            this.codeTextBox.Size = new System.Drawing.Size(434, 175);
-            this.codeTextBox.TabIndex = 20;
-            this.codeTextBox.Text = "";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(278, 34);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(92, 13);
-            this.label4.TabIndex = 19;
-            this.label4.Text = "Start Line Number";
-            // 
-            // lineNumberText
-            // 
-            this.lineNumberText.Location = new System.Drawing.Point(380, 31);
-            this.lineNumberText.Name = "lineNumberText";
-            this.lineNumberText.Size = new System.Drawing.Size(48, 20);
-            this.lineNumberText.TabIndex = 18;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(17, 58);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(54, 13);
-            this.label3.TabIndex = 17;
-            this.label3.Text = "File Name";
-            // 
-            // fileNameText
-            // 
-            this.fileNameText.Location = new System.Drawing.Point(93, 52);
-            this.fileNameText.Name = "fileNameText";
-            this.fileNameText.Size = new System.Drawing.Size(125, 20);
-            this.fileNameText.TabIndex = 16;
+            this.exportMarkUpBtn.Location = new System.Drawing.Point(802, 627);
+            this.exportMarkUpBtn.Name = "exportMarkUpBtn";
+            this.exportMarkUpBtn.Size = new System.Drawing.Size(120, 23);
+            this.exportMarkUpBtn.TabIndex = 7;
+            this.exportMarkUpBtn.Text = "Export As MarkUp";
+            this.exportMarkUpBtn.UseVisualStyleBackColor = true;
+            this.exportMarkUpBtn.Click += new System.EventHandler(this.exportMarkUpBtn_Click);
             // 
             // CodeReviewTool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(699, 662);
+            this.ClientSize = new System.Drawing.Size(938, 662);
+            this.Controls.Add(this.exportMarkUpBtn);
             this.Controls.Add(this.saveReview);
             this.Controls.Add(this.editReview);
             this.Controls.Add(this.tabControl1);
@@ -302,6 +318,7 @@
         private System.Windows.Forms.TextBox lineNumberText;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox fileNameText;
+        private System.Windows.Forms.Button exportMarkUpBtn;
     }
 }
 

@@ -2,8 +2,8 @@
 {
     public enum CommentType
     {
-        Refactor,
         UnusedDirectives,
+        Refactor,      
         Comment,
     }
 }

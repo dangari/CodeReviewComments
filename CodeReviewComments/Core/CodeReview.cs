@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
 using System.Xml;
 using System.Xml.Serialization;
 using CodeReviewComments.Data;
@@ -86,8 +85,14 @@ namespace CodeReviewComments.Core
                 m_Data = (CodeReviewData) xmlSerializer.Deserialize(reader);
                 m_Data.CreateDeserializeDic();
                 ReloadCommentList();
+                m_CommentCount = m_Data.CommentDic.Count;
                 m_OnChange();
             }
+        }
+
+        public string GetMarkUp()
+        {
+            return MarkUpGenerator.GenerateMarkup(m_Data);
         }
 
         private void ReloadCommentList()
