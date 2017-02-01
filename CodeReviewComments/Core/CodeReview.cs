@@ -1,5 +1,7 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Xml;
 using System.Xml.Serialization;
 using CodeReviewComments.Data;
@@ -8,18 +10,31 @@ namespace CodeReviewComments.Core
 {
     public class CodeReview
     {
-        public CodeReviewData m_Data;
+        private CodeReviewData m_Data;
+        private readonly Action m_OnChange;
+        
         private int m_CommentCount;
         private readonly string m_Path;
 
-        public BindingList<string> CommentInds { get; }
+        public BindingList<string> CommentInds { get; set; }
 
-        public CodeReview()
+        public CodeReview(Action onChange)
         {
             m_Path = $"{Directory.GetCurrentDirectory().Replace("bin\\", string.Empty).Replace("Debug", string.Empty).Replace("Release", string.Empty)}\\CodeReviews\\";
             m_Data = new CodeReviewData();
             m_CommentCount = 0;
             CommentInds = new BindingList<string> ();
+            m_OnChange = onChange;
+        }
+
+        public void SetIssueNumber(string issueNumber)
+        {
+            m_Data.IssueNumber = issueNumber;
+        }
+
+        public string GetIssueNumber()
+        {
+            return m_Data.IssueNumber;
         }
 
         public void AddComment(CommentType type, string fileName, int lineNumber, string text)
@@ -65,9 +80,22 @@ namespace CodeReviewComments.Core
         public void LoadData(string fileName)
         {
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(CodeReviewData));
-            using (StreamReader reader = new StreamReader($"{m_Path}{fileName}.cwr"))
+            using (StreamReader reader = new StreamReader($"{m_Path}{fileName}"))
             {
                 m_Data = (CodeReviewData) xmlSerializer.Deserialize(reader);
+                m_Data.CreateDeserializeDic();
+                ReloadCommentList();
+                m_OnChange();
+            }
+        }
+
+        private void ReloadCommentList()
+        {
+            CommentInds.Clear();
+
+            foreach (var item in m_Data.Comments)
+            {
+                CommentInds.Add(item.Key);
             }
         }
     }

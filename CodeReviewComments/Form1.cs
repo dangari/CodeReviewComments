@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Serialization;
 using CodeReviewComments.Core;
 using CodeReviewComments.Data;
+using CodeReviewComments.Forms;
 
 namespace CodeReviewComments
 {
@@ -17,7 +19,7 @@ namespace CodeReviewComments
         public Form1()
         {
             InitializeComponent();
-            m_CodeReview = new CodeReview();
+            m_CodeReview = new CodeReview(OnChange);
             commentList.DataSource = m_CodeReview.CommentInds;
         }
 
@@ -26,7 +28,7 @@ namespace CodeReviewComments
             //todo: Add error handling
             try
             {
-                CommentType type = (CommentType)Enum.Parse(typeof(CommentType), commentType.SelectedItem.ToString(), true);
+                CommentType type = (CommentType) Enum.Parse(typeof(CommentType), commentType.SelectedItem.ToString(), true);
                 int lineNumber = int.Parse(lineNumberText.Text);
                 string fileName = fileNameText.Text;
                 string text = commentBox.Text;
@@ -50,12 +52,17 @@ namespace CodeReviewComments
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
-            
+
         }
 
         private void commentList_SelectedIndexChanged(object sender, EventArgs e)
         {
             m_SelectedComment = commentList.Text;
+            if (string.IsNullOrEmpty(m_SelectedComment))
+            {
+                return;
+            }
+
             Comment comment = m_CodeReview.LoadComment(m_SelectedComment);
             commentType.Text = comment.Type.ToString();
             lineNumberText.Text = comment.LineNumber.ToString();
@@ -67,13 +74,37 @@ namespace CodeReviewComments
         {
             if (string.IsNullOrEmpty(issueNumberText.Text))
             {
-                MessageBox.Show("Issue Name is Needed", "Error", MessageBoxButtons.OK,
+                MessageBox.Show(
+                    "Issue Name is Needed",
+                    "Error",
+                    MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
                 return;
             }
 
-            m_CodeReview.m_Data.IssueNumber = issueNumberText.Text;
+            m_CodeReview.SetIssueNumber(issueNumberText.Text);
             m_CodeReview.SaveComments(issueNumberText.Text);
+        }
+
+        private void editReview_Click(object sender, EventArgs e)
+        {
+            string path =
+                $"{Directory.GetCurrentDirectory().Replace("bin\\", string.Empty).Replace("Debug", string.Empty).Replace("Release", string.Empty)}\\CodeReviews\\";
+            IList<string> paths = Directory.GetFiles(path);
+            paths = paths.Select(x => x.Replace(path, string.Empty)).ToList();
+
+            var form = new SelectFileForm(paths, m_CodeReview);
+            form.ShowDialog();
+        }
+
+        private void OnChange()
+        {
+            commentType.Text = string.Empty;
+            lineNumberText.Text = string.Empty;
+            fileNameText.Text = string.Empty;
+            commentBox.Text = string.Empty;
+            issueNumberText.Text = m_CodeReview.GetIssueNumber();
+            commentList.ClearSelected();
         }
     }
 }

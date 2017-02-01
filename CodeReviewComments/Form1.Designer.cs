@@ -219,6 +219,7 @@
             this.editReview.TabIndex = 5;
             this.editReview.Text = "Edit Review";
             this.editReview.UseVisualStyleBackColor = true;
+            this.editReview.Click += new System.EventHandler(this.editReview_Click);
             // 
             // saveReview
             // 

@@ -32,5 +32,13 @@ namespace CodeReviewComments.Data
                 CommentDic.Add(new CommentDicItems {Comment = item.Value , Key = item.Key});
             }
         }
+
+        public void CreateDeserializeDic()
+        {
+            foreach (CommentDicItems item in CommentDic)
+            {
+                Comments.Add(item.Key, item.Comment);
+            }
+        }
     }
 }
