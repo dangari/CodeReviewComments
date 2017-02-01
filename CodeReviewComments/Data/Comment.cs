@@ -15,5 +15,8 @@ namespace CodeReviewComments.Data
 
         [XmlElement]
         public string Text { get; set; }
+
+        [XmlElement]
+        public string Code { get; set; }
     }
 }

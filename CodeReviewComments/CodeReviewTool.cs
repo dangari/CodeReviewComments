@@ -3,24 +3,24 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using System.Xml;
-using System.Xml.Serialization;
 using CodeReviewComments.Core;
 using CodeReviewComments.Data;
 using CodeReviewComments.Forms;
 
 namespace CodeReviewComments
 {
-    public partial class Form1 : Form
+    public partial class CodeReviewTool : Form
     {
         private readonly CodeReview m_CodeReview;
         private string m_SelectedComment = string.Empty;
 
-        public Form1()
+        public CodeReviewTool()
         {
             InitializeComponent();
             m_CodeReview = new CodeReview(OnChange);
             commentList.DataSource = m_CodeReview.CommentInds;
+            commentType.DataSource = typeof(CommentType).GetEnumNames();
+            commentType.SelectedIndex = 0;
         }
 
         private void saveComment_Click(object sender, EventArgs e)
@@ -29,17 +29,18 @@ namespace CodeReviewComments
             try
             {
                 CommentType type = (CommentType) Enum.Parse(typeof(CommentType), commentType.SelectedItem.ToString(), true);
-                int lineNumber = int.Parse(lineNumberText.Text);
+                int lineNumber = string.IsNullOrEmpty(lineNumberText.Text) ? 0 : int.Parse(lineNumberText.Text);
                 string fileName = fileNameText.Text;
                 string text = commentBox.Text;
+                string code = codeTextBox.Text;
 
                 if (string.IsNullOrEmpty(m_SelectedComment))
                 {
-                    m_CodeReview.AddComment(type, fileName, lineNumber, text);
+                    m_CodeReview.AddComment(type, fileName, lineNumber, text, code);
                 }
                 else
                 {
-                    m_CodeReview.EditComment(m_SelectedComment, type, fileName, lineNumber, text);
+                    m_CodeReview.EditComment(m_SelectedComment, type, fileName, lineNumber, text, code);
                 }
 
                 m_SelectedComment = string.Empty;
@@ -90,7 +91,7 @@ namespace CodeReviewComments
         {
             string path =
                 $"{Directory.GetCurrentDirectory().Replace("bin\\", string.Empty).Replace("Debug", string.Empty).Replace("Release", string.Empty)}\\CodeReviews\\";
-            IList<string> paths = Directory.GetFiles(path);
+            IList<string> paths = Directory.GetFiles(path, "*.crw");
             paths = paths.Select(x => x.Replace(path, string.Empty)).ToList();
 
             var form = new SelectFileForm(paths, m_CodeReview);
@@ -103,8 +104,38 @@ namespace CodeReviewComments
             lineNumberText.Text = string.Empty;
             fileNameText.Text = string.Empty;
             commentBox.Text = string.Empty;
+            codeTextBox.Text = string.Empty;
             issueNumberText.Text = m_CodeReview.GetIssueNumber();
             commentList.ClearSelected();
+        }
+
+        private void commentType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CommentType type = (CommentType)Enum.Parse(typeof(CommentType), commentType.SelectedItem.ToString(), true);
+
+            switch (type)
+            {
+                case CommentType.Refactor:
+                    fileNameText.Enabled = true;
+                    lineNumberText.Enabled = true;
+                    codeTextBox.Enabled = true;
+                    commentBox.Enabled = true;
+                    break;
+                case CommentType.UnusedDirectives:
+                    fileNameText.Enabled = true;
+                    lineNumberText.Enabled = false;
+                    codeTextBox.Enabled = false;
+                    commentBox.Enabled = false;
+                    break;
+                case CommentType.Comment:
+                    fileNameText.Enabled = true;
+                    commentBox.Enabled = true;
+                    lineNumberText.Enabled = false;
+                    codeTextBox.Enabled = false;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
     }
 }

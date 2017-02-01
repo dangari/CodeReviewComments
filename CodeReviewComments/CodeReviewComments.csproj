@@ -50,11 +50,11 @@
     <Compile Include="Data\CodeReviewData.cs" />
     <Compile Include="Data\Comment.cs" />
     <Compile Include="Data\CommentType.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="CodeReviewTool.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="CodeReviewTool.Designer.cs">
+      <DependentUpon>CodeReviewTool.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\SelectFileForm.cs">
       <SubType>Form</SubType>
@@ -64,8 +64,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="CodeReviewTool.resx">
+      <DependentUpon>CodeReviewTool.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SelectFileForm.resx">
       <DependentUpon>SelectFileForm.cs</DependentUpon>

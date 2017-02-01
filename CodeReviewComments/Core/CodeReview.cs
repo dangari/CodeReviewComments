@@ -37,22 +37,23 @@ namespace CodeReviewComments.Core
             return m_Data.IssueNumber;
         }
 
-        public void AddComment(CommentType type, string fileName, int lineNumber, string text)
+        public void AddComment(CommentType type, string fileName, int lineNumber, string text, string code)
         {
-            Comment comment = new Comment {Type = type, FileName = fileName, LineNumber = lineNumber, Text = text};
+            Comment comment = new Comment {Type = type, FileName = fileName, LineNumber = lineNumber, Text = text, Code = code};
             string commentInd = $"Comment_{m_CommentCount}";
             m_Data.Comments.Add(commentInd, comment);
             ++m_CommentCount;
             CommentInds.Add(commentInd);
         }
 
-        public void EditComment(string commentName, CommentType type, string fileName, int lineNumber, string text)
+        public void EditComment(string commentName, CommentType type, string fileName, int lineNumber, string text, string code)
         {
             Comment comment = m_Data.Comments[commentName];
             comment.Type = type;
             comment.FileName = fileName;
             comment.LineNumber = lineNumber;
             comment.Text = text;
+            comment.Code = code;
         }
 
         public Comment LoadComment(string commentName)
@@ -72,7 +73,7 @@ namespace CodeReviewComments.Core
                     xmlSerializer.Serialize(writer, m_Data);
                     xml = sww.ToString(); // Your XML
                     Directory.CreateDirectory(m_Path);
-                    File.WriteAllText($"{m_Path}{fileName}.cwr", xml);
+                    File.WriteAllText($"{m_Path}{fileName}.crw", xml);
                 }
             }
         }

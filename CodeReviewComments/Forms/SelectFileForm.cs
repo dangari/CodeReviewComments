@@ -6,7 +6,7 @@ namespace CodeReviewComments.Forms
 {
     public partial class SelectFileForm : Form
     {
-        private CodeReview m_CodeReview;
+        private readonly CodeReview m_CodeReview;
 
         public SelectFileForm(IList<string> files, CodeReview codeReview)
         {
